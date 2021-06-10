@@ -1,16 +1,16 @@
-function Error(status) {
-	return (
-			<div>
-				<h1>Oops, something went wrong</h1>
-				<p>You have a {status.statusCode} error!</p>
-			</div>
-	)
+function Error({ statusCode }) {
+  return (
+    <p>
+      {statusCode
+        ? `An error ${statusCode} occurred on server`
+        : 'An error occurred on client'}
+    </p>
+  )
 }
 
-Error.getInitialProps = ({ req, res, err }) => {
-	const statusCode = res ? res.statusCode : err ? err.statusCode : 520
-
-	return { statusCode }
+Error.getInitialProps = ({ res, err }) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404
+  return { statusCode }
 }
 
 export default Error
